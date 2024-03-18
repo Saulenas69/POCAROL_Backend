@@ -52,3 +52,17 @@ exports.login = async (req, res, next) => {
         next(error);
     }
 }
+
+exports.getUserById = async (req, res, next) => {
+    try {
+        const userId = req.body.userId;
+        const user = await UserServices.getUserById(userId);
+        if (!user) {
+            throw new Error('User not found');
+        }
+        res.json(user);
+    } catch (error) {
+        console.log(error);
+        next(error);
+    }
+}

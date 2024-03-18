@@ -35,6 +35,15 @@ class UserServices{
     static async generateAccessToken(tokenData,JWTSecret_Key,JWT_EXPIRE){
         return jwt.sign(tokenData, JWTSecret_Key, { expiresIn: JWT_EXPIRE });
     }
+
+    static async getUserById(userId) {
+        try {
+          const user = await UserModel.findOne({ _id: userId });
+          return user;
+        } catch (error) {
+          throw error;
+        }
+      }
 }
 
 module.exports = UserServices;
